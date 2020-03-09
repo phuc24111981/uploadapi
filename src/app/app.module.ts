@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { UploadPage } from '../pages/upload/upload';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -14,7 +15,8 @@ import { CcupProvider } from '../providers/ccup/ccup';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    UploadPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { CcupProvider } from '../providers/ccup/ccup';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    UploadPage
   ],
   providers: [
     StatusBar,

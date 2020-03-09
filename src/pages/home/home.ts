@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import { CcupProvider } from '../../providers/ccup/ccup';
-import { FileUploader, FileLikeObject } from  'ng2-file-upload';
-import { concat } from  'rxjs/operators';
 
 @Component({
   selector: 'page-home',
@@ -13,44 +11,27 @@ import { concat } from  'rxjs/operators';
 })
 export class HomePage  {
 
-
-  public fileUploader: FileUploader = new FileUploader({});
+  public uploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
-  
-  constructor(public navCtrl: NavController, private uploadingService: CcupProvider) 
-  {
+
+  constructor() { 
 
   }
-  fileOverBase(event): void {
-    this.hasBaseDropZoneOver = event;
-  }
+
   getFiles(): FileLikeObject[] {
-    return this.fileUploader.queue.map((fileItem) => {
+    return this.uploader.queue.map((fileItem) => {
       return fileItem.file;
-
     });
   }
-  uploadFiles() {
 
-    let files = this.getFiles();
-    let requests = [];
-
-    files.forEach((file) => {
-      let formData = new FormData();
-      formData.append('file' , file.rawFile, file.name);
-      console.log(formData);
-      requests.push(this.uploadingService.uploadFormData(formData).subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {  
-          console.log(err);
-        }
-      ));
-
-    });
-    
-
+  fileOverBase(ev): void {
+    this.hasBaseDropZoneOver = ev;
   }
+
+  reorderFiles(reorderEvent: CustomEvent): void {
+    let element = this.uploader.queue.splice(reorderEvent.detail.from, 1)[0];
+    this.uploader.queue.splice(reorderEvent.detail.to, 0, element);
+  }
+  
 
 }
