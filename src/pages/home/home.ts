@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
-import { FileUploader, FileLikeObject } from 'ng2-file-upload';
+import { NavController } from 'ionic-angular';
+import { Component, enableProdMode } from '@angular/core';
 import { CcupProvider } from '../../providers/ccup/ccup';
+import { FileUploader, FileLikeObject } from  'ng2-file-upload';
+
+if(!/localhost/.test(document.location.host)) {
+  enableProdMode();
+}
 
 @Component({
   selector: 'page-home',
@@ -10,27 +15,56 @@ import { CcupProvider } from '../../providers/ccup/ccup';
   ]
 })
 export class HomePage  {
-
-  public uploader: FileUploader = new FileUploader({});
+  public fileUploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
-
-  constructor() { 
+  public uploadSuccess: boolean = true;
+  value: any[] = [];
+  constructor(public navCtrl: NavController, private uploadingService: CcupProvider) 
+  {
 
   }
-
+  fileOverBase(event): void {
+    this.hasBaseDropZoneOver = event;
+  }
   getFiles(): FileLikeObject[] {
-    return this.uploader.queue.map((fileItem) => {
+    return this.fileUploader.queue.map((fileItem) => {
       return fileItem.file;
+
     });
   }
+  uploadFiles() 
+  {
+    this.uploadSuccess = true;
+    let files = this.getFiles();
+    let requests = [];
 
-  fileOverBase(ev): void {
-    this.hasBaseDropZoneOver = ev;
-  }
+    files.forEach((file) => 
+    {
+      let formData = new FormData();
+      formData.append('file' , file.rawFile, file.name);
+      console.log(formData);
+      requests.push(this.uploadingService.uploadFormData(formData).subscribe
+      (
+        (res) => {},
+        (err) => 
+        {  
+          //console.log(err);
+          this.uploadSuccess = false;
+          //alert('Teo');
+        }
+      ));
+        
+    });
+    
+    if (this.uploadSuccess)
+        {
+          alert('Upload ngon lành');
+        }
+        else
+        {
+          alert('Upload thế éo nào bị lỗi òi')
+        }
 
-  reorderFiles(reorderEvent: CustomEvent): void {
-    let element = this.uploader.queue.splice(reorderEvent.detail.from, 1)[0];
-    this.uploader.queue.splice(reorderEvent.detail.to, 0, element);
   }
   
 

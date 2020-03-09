@@ -11,6 +11,9 @@ import { UploadPage } from '../pages/upload/upload';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CcupProvider } from '../providers/ccup/ccup';
+import { DxButtonModule } from 'devextreme-angular';
+import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,11 @@ import { CcupProvider } from '../providers/ccup/ccup';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    FileUploadModule
+    FileUploadModule,
+    DxButtonModule,
+        DxCheckBoxModule,
+        DxFileUploaderModule,
+        DxSelectBoxModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpErrorResponse, HttpEventType, HttpHeaders } from  '@angular/common/http';  
+import { HttpClient, HttpHeaders } from  '@angular/common/http';  
 
 
 
 @Injectable()
 export class CcupProvider 
 {
-  //SERVER_URL: string = "http://localhost/api/api/FileUploading/UploadFile"; 
-  SERVER_URL: string = "http://118.69.59.60:8086/api/api/FileUploading/UploadFile"; 
+  SERVER_URL: string = "http://localhost/api/api/FileUploading/UploadFile"; 
+  //SERVER_URL: string = "http://118.69.59.60:8086/api/api/FileUploading/UploadFile"; 
 
   constructor(public http: HttpClient) {}
 

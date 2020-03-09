@@ -1,9 +1,9 @@
 
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, } from 'ionic-angular';
+import { Component,} from '@angular/core';
 import { CcupProvider } from '../../providers/ccup/ccup';
 import { FileUploader, FileLikeObject } from  'ng2-file-upload';
-import { concat } from  'rxjs/operators';
+
 
 
 @IonicPage()

@@ -17,7 +17,6 @@
     "@angular/compiler-cli": "5.2.11",
     "@angular/core": "5.2.11",
     "@angular/forms": "5.2.11",
-    "@angular/material": "^9.1.1",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/core": "4.20.0",
@@ -25,6 +24,9 @@
     "@ionic-native/status-bar": "4.20.0",
     "@ionic/storage": "2.2.0",
     "cordova-android": "8.1.0",
+    "cordova-ios": "5.1.1",
+    "devextreme": "19.2.6",
+    "devextreme-angular": "19.2.6",
     "ionic-angular": "3.9.9",
     "ionicons": "3.0.0",
     "ng2-file-upload": "^1.4.0",
@@ -56,6 +58,7 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
+      "ios",
       "android"
     ]
   }
