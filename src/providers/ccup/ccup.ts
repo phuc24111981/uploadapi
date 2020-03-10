@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from  '@angular/common/http';  
+import { HttpClient, HttpHeaders, HttpErrorResponse } from  '@angular/common/http';  
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 
 
 
@@ -13,8 +16,40 @@ export class CcupProvider
 
   public uploadFormData(formData) 
   {
-    const httpOptions = {headers: new HttpHeaders({})};
-    return this.http.post<any>(this.SERVER_URL, formData, httpOptions);  
+    // const httpOptions = 
+    // {
+    //   headers: new HttpHeaders({})    
+    // };
+
+    // const httpOptions = {
+    //   reportProgress: true,
+    //   observe: 'events'
+    // };
+
+    return this.http.post<any>(this.SERVER_URL, formData, 
+    {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      catchError(this.errorMgmt)
+    )  
+  }
+
+  errorMgmt(error: HttpErrorResponse) 
+  {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) 
+    {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } 
+    else 
+    {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return errorMessage;
   }
 
 }

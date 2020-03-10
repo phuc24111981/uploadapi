@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from 'ng2-file-upload';
 import { CcupProvider } from '../providers/ccup/ccup';
 import { DxButtonModule } from 'devextreme-angular';
-import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devextreme-angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,20 +27,20 @@ import { DxCheckBoxModule, DxFileUploaderModule, DxSelectBoxModule } from 'devex
     HttpClientModule,
     FileUploadModule,
     DxButtonModule,
-        DxCheckBoxModule,
-        DxFileUploaderModule,
-        DxSelectBoxModule
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
+  entryComponents: 
+  [
     MyApp,
     HomePage,
     UploadPage
   ],
-  providers: [
+  providers: 
+  [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     CcupProvider
   ]
 })

@@ -11,7 +11,7 @@
   </div>
 
 
-  <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" multiple /><br/><br/><br/>
+  <input type="file" accept="*" ng2FileSelect [uploader]="fileUploader" multiple /><br/><br/><br/>
 
   <!-- <button ion-button color="primary">Primary</button> -->
   <!-- <button ion-button (click)="uploadFiles()">Upload files</button> -->
@@ -25,5 +25,7 @@
       {{ item?.file?.name }}
     </li>
   </ul>
+  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+  </div>
 
 </ion-content>
