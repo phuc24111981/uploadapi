@@ -46,59 +46,44 @@ export class HomePage
     let files = this.getFiles();
     let requests = [];
 
-    files.forEach((file) => 
-    {
-      let formData = new FormData();
-      formData.append('file' , file.rawFile, file.name);
-      console.log(formData);
-      requests.push(this.uploadingService.uploadFormData(formData).subscribe
-      (
-        (res) => {},
-        (err) => 
-        {  
-          //console.log(err);
-          this.uploadSuccess = false;
-          //alert('Teo');
-        }
-      ));
+    // files.forEach((file) => 
+    // {
+    //   let formData = new FormData();
+    //   formData.append('file' , file.rawFile, file.name);
+    //   console.log(formData);
+    //   requests.push(this.uploadingService.uploadFormData(formData).subscribe
+    //   (
+    //     (res) => {},
+    //     (err) => 
+    //     {  
+    //       //console.log(err);
+    //       this.uploadSuccess = false;
+    //       //alert('Teo');
+    //     }
+    //   ));
         
-    });
+    // });
 
     let formData = new FormData();
     formData.append('file' , files[0].rawFile, files[0].name);
-    this.uploadingService.uploadFormData(formData).subscribe((event: HttpEvent<any>) => {
-      switch (event.type) {
-        case HttpEventType.Sent:
-          console.log('Request has been made!');
-          break;
-        case HttpEventType.ResponseHeader:
-          console.log('Response header has been received!');
-          break;
-        case HttpEventType.UploadProgress:
-          this.progress = Math.round(event.loaded / event.total * 100);
-          console.log(`Uploaded! ${this.progress}%`);
-          break;
-        case HttpEventType.Response:
-          console.log('User successfully created!', event.body);
-          setTimeout(() => {
-            this.progress = 0;
-          }, 1500);
-
+    requests.push(this.uploadingService.uploadFormData(formData).subscribe((event: String) => 
+    {
+      if(event == 'File uploaded!')
+      {
+        alert('Up xong roi!');
       }
-    });
+      else
+      {
+        alert('Upload lỗi cmnr!');
+      }
+      
+    }));
 
 
 
 
 
-    if (this.uploadSuccess)
-        {
-          alert('Upload ngon lành');
-        }
-        else
-        {
-          alert('Upload thế éo nào bị lỗi òi')
-        }
+    
 
   }
   
