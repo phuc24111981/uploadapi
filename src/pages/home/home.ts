@@ -3,7 +3,6 @@ import { Component, enableProdMode } from '@angular/core';
 import { CcupProvider } from '../../providers/ccup/ccup';
 import { FileUploader, FileLikeObject } from  'ng2-file-upload';
 import { FormGroup } from '@angular/forms';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 
 enableProdMode();
@@ -24,6 +23,9 @@ export class HomePage
 
   form: FormGroup;
   progress: number = 0;
+  inProgress = false;
+  filesCount: number = 0;
+  filesUploadAlready: number = 0;
   
   constructor(public navCtrl: NavController, private uploadingService: CcupProvider) 
   {
@@ -63,29 +65,46 @@ export class HomePage
     //   ));
         
     // });
+    this.filesCount = files.length;
+    console.log(this.filesCount);
+    this.inProgress = true;
+    this.filesUploadAlready = 0;
 
-    let formData = new FormData();
-    formData.append('file' , files[0].rawFile, files[0].name);
-    requests.push(this.uploadingService.uploadFormData(formData).subscribe((event: String) => 
+    files.forEach((file) => 
     {
-      if(event == 'File uploaded!')
+      let formData = new FormData();
+      formData.append('file' , file.rawFile, file.name);
+      requests.push(this.uploadingService.uploadFormData(formData).subscribe((event: String) => 
       {
-        alert('Up xong roi!');
-      }
-      else
-      {
-        alert('Upload lỗi cmnr!');
-      }
-      
-    }));
-
-
-
-
-
-    
+        if(event == 'File uploaded!')
+        {
+          this.filesUploadAlready = this.filesUploadAlready + 1;
+          //alert('Up xong roi!');
+        }
+        else
+        {
+          alert('Upload lỗi cmnr!');
+        }
+        
+      }));
+    });
 
   }
+
+  onButtonClick() 
+  {
+    if (this.inProgress) 
+    {
+
+    } 
+    else 
+    {
+
+    }
+    this.inProgress = !this.inProgress;
+}
+
+
   
 
 }
