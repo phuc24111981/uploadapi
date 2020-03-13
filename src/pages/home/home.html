@@ -5,22 +5,51 @@
 </ion-header>
 
 <ion-content padding>
-
-
-  <input style="width: 100%;" type="file" accept="*" ng2FileSelect [uploader]="fileUploader" multiple /><br/><br/><br/>
-
+  <div class="upload-btn-wrapper">
+    <button ion-button style="width: 100%;" color="secondary" class="btn" >Browse files</button>    
+    <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" multiple />
+  </div><br/><br/>
   <!-- <button ion-button color="primary">Primary</button> -->
   <!-- <button ion-button (click)="uploadFiles()">Upload files</button> -->
 
-<dx-button style="width: 100%;"
-    text="UPLOAD"
-    (onClick)="uploadFiles()">
-</dx-button>
-  <h2>Your files: {{ fileUploader?.queue?.length }}</h2>
+<button ion-button color="danger" style="width: 100%;" (click)="uploadFiles()" >Upload</button>
+
+  <h3>Your files: {{ fileUploader?.queue?.length }}</h3>
   <ul style="width: 100%;">
     <li *ngFor="let item of fileUploader.queue">
       {{ item?.file?.name }}
     </li>
   </ul>
-  <h2>Files Uploaded: {{ filesUploadAlready }} / {{ filesCount }}</h2>
+  <!-- <h2>Files Uploaded: {{ filesUploadAlready }} / {{ filesCount }}</h2> -->
+
+  <dx-popup
+    showCloseButton="false"     
+    [width]="300"
+        [height]="89"
+        [showTitle]="false"
+        title="Progress"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="false"
+        
+        [(visible)]="popupVisible">
+        
+        <progress-bar [progress]="progress" [color]="'orange'"></progress-bar>
+        
+  </dx-popup>
+
+  <!-- <dx-popup
+      showCloseButton="false"     
+      [width]="92"
+      [height]="90"
+      [showTitle]="false"
+      title="Progress"
+      [dragEnabled]="false"
+      [closeOnOutsideClick]="false"
+      
+      [(visible)]="popupVisible">
+      
+      <dx-load-indicator style="margin-left: auto; margin-right: auto; width: 50px;" id="large-indicator" height="47" width="47"></dx-load-indicator>
+
+  </dx-popup> -->
+
 </ion-content>

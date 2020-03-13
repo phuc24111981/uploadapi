@@ -14,6 +14,9 @@ import { CcupProvider } from '../providers/ccup/ccup';
 import { DxButtonModule } from 'devextreme-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { DxPopupModule, DxTemplateModule } from 'devextreme-angular';
+import { ProgressBarModule } from "angular-progress-bar";
+import { DxLoadIndicatorModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FileUploadModule,
     DxButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DxPopupModule,
+    DxTemplateModule,
+    ProgressBarModule,
+    DxLoadIndicatorModule
   ],
   bootstrap: [IonicApp],
   entryComponents: 

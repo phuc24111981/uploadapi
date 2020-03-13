@@ -10,9 +10,7 @@ enableProdMode();
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [
-    CcupProvider
-  ]
+  providers: [CcupProvider]
 })
 export class HomePage  
 {
@@ -26,7 +24,8 @@ export class HomePage
   inProgress = false;
   filesCount: number = 0;
   filesUploadAlready: number = 0;
-  
+  popupVisible = false;
+
   constructor(public navCtrl: NavController, private uploadingService: CcupProvider) 
   {
 
@@ -67,7 +66,7 @@ export class HomePage
     // });
     this.filesCount = files.length;
     console.log(this.filesCount);
-    this.inProgress = true;
+    this.popupVisible = true;
     this.filesUploadAlready = 0;
 
     files.forEach((file) => 
@@ -80,10 +79,11 @@ export class HomePage
         {
           this.filesUploadAlready = this.filesUploadAlready + 1;
           //alert('Up xong roi!');
+          this.checkIfDoneUpload();
         }
         else
         {
-          alert('Upload lỗi cmnr!');
+          alert('Upload failed!');
         }
         
       }));
@@ -91,19 +91,16 @@ export class HomePage
 
   }
 
-  onButtonClick() 
+  checkIfDoneUpload()
   {
-    if (this.inProgress) 
+    this.progress = Math.round((this.filesUploadAlready * 100) / this.filesCount);
+    if(this.filesUploadAlready >= this.filesCount)
     {
-
-    } 
-    else 
-    {
-
+      //Done
+      this.popupVisible = false;
     }
-    this.inProgress = !this.inProgress;
-}
-
+    
+  }
 
   
 
