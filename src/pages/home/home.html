@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <div class="upload-btn-wrapper">
-    <button ion-button style="width: 100%;" color="secondary" class="btn" >Browse files</button>    
+    <button ion-button style="width: 100%;" color="secondary" class="btn" >Add files</button>    
     <input type="file" accept="image/*" ng2FileSelect [uploader]="fileUploader" multiple />
   </div><br/><br/>
   <!-- <button ion-button color="primary">Primary</button> -->
@@ -16,8 +16,19 @@
 
   <h3>Your files: {{ fileUploader?.queue?.length }}</h3>
   <ul style="width: 100%;">
-    <li *ngFor="let item of fileUploader.queue">
-      {{ item?.file?.name }}
+    <li *ngFor="let item of fileUploader.queue ; let index = index">
+      <table>
+        <tr>
+          <td>
+            {{ item?.file?.name }} 
+            <img [src]="getThumbnail(index)" class="contribution-image" />
+          </td>
+          <td>
+            <button (click)="removeItem(index)">delete</button>
+          </td>
+        </tr>
+      </table>
+      
     </li>
   </ul>
   <!-- <h2>Files Uploaded: {{ filesUploadAlready }} / {{ filesCount }}</h2> -->

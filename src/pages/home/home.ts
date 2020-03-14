@@ -2,7 +2,7 @@ import { NavController } from 'ionic-angular';
 import { Component, enableProdMode } from '@angular/core';
 import { CcupProvider } from '../../providers/ccup/ccup';
 import { FileUploader, FileLikeObject } from  'ng2-file-upload';
-import { FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 enableProdMode();
@@ -17,19 +17,37 @@ export class HomePage
   public fileUploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
   public uploadSuccess: boolean = true;
-  value: any[] = [];
 
-  form: FormGroup;
+
   progress: number = 0;
   inProgress = false;
   filesCount: number = 0;
   filesUploadAlready: number = 0;
   popupVisible = false;
+  public previewPath: any;
+  public pPath: Array<any> = [];
+  
 
-  constructor(public navCtrl: NavController, private uploadingService: CcupProvider) 
+  constructor(public navCtrl: NavController, private uploadingService: CcupProvider, public sanitizer: DomSanitizer ) 
   {
-
+    this.fileUploader.onAfterAddingFile = (fileItem) => {
+      //this.setPreview(fileItem);
+      this.pPath.push(this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file))));
+    }
   }
+  removeItem(index) {
+    this.fileUploader.queue[index].remove(); 
+    this.pPath.splice(index,1);
+  }
+  setPreview(fileItem) {
+    this.previewPath = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
+    this.pPath.push(this.previewPath);
+  }
+
+  getThumbnail(index) {
+    return this.pPath[index];
+  }
+
   fileOverBase(event): void 
   {
     this.hasBaseDropZoneOver = event;
@@ -39,6 +57,7 @@ export class HomePage
     return this.fileUploader.queue.map((fileItem) => 
     {
       return fileItem.file;
+    
     });
   }
   uploadFiles() 
@@ -46,7 +65,7 @@ export class HomePage
     this.uploadSuccess = true;
     let files = this.getFiles();
     let requests = [];
-
+    this.progress = 0;
     // files.forEach((file) => 
     // {
     //   let formData = new FormData();
@@ -90,6 +109,7 @@ export class HomePage
     });
 
   }
+
 
   checkIfDoneUpload()
   {
