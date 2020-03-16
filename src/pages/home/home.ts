@@ -94,7 +94,7 @@ export class HomePage
       formData.append('file' , file.rawFile, file.name);
       requests.push(this.uploadingService.uploadFormData(formData).subscribe((event: String) => 
       {
-        if(event == 'File uploaded!')
+        if(event == '0')
         {
           this.filesUploadAlready = this.filesUploadAlready + 1;
           //alert('Up xong roi!');
@@ -102,7 +102,7 @@ export class HomePage
         }
         else
         {
-          alert('Upload failed!');
+          //alert('Upload failed!');
         }
         
       }));
