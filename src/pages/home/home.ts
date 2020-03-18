@@ -39,10 +39,10 @@ export class HomePage
     this.fileUploader.queue[index].remove(); 
     this.pPath.splice(index,1);
   }
-  setPreview(fileItem) {
-    this.previewPath = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
-    this.pPath.push(this.previewPath);
-  }
+  // setPreview(fileItem) {
+  //   this.previewPath = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
+  //   this.pPath.push(this.previewPath);
+  // }
 
   getThumbnail(index) {
     return this.pPath[index];

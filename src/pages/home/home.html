@@ -31,8 +31,59 @@
       
     </li>
   </ul>
-  <!-- <h2>Files Uploaded: {{ filesUploadAlready }} / {{ filesCount }}</h2> -->
-
+  
+  <div class="container" *ngIf="devWidth < 1200">
+    <div class="card" *ngFor="let item of jsonData; let i = index">
+      <ion-list>
+        <ion-item>
+          <div style="color:#0094ff;float:left;">{{item.RDATE | date:'dd/MM/yyyy'}}</div>
+          <div style="color:#ff0000;float:right;">{{item.RDATE | date:'H'}}</div>
+        </ion-item>
+        <ion-item><strong style="color:#ff6a00;">{{item.WORKNAME}}</strong></ion-item>
+        <ion-item>
+          <h3 color="primary" style="float:left;vertical-align:middle;">Progress</h3>
+          <label style="float:right;">{{ item.RPROGRESS }}%</label>
+          <div style="float:left;margin-top:3px;" class="progress-bar green stripes">
+            <span [style.width.%]="item.RPROGRESS"></span>
+          </div>
+        </ion-item>
+        <ion-item>
+          {{item.RWRESULT}}
+        </ion-item>
+        <ion-item>
+          {{item.RCONTENT}}
+        </ion-item>
+        <ion-item>
+          {{item.RMANAGER_COMMENT}}
+        </ion-item>
+      </ion-list>
+      <table cellpadding="0" cellspacing="0" style="position:absolute;bottom:10px;width:295px;">
+        <tr>
+          <td style="text-align:center;">
+            <button *ngIf="loginUsername == wrusername" (click)="addWrClick(item.RWORKID,item.WORKNAME)"
+                    color="secondary" ion-button icon-only outline style="border:none;">
+              <ion-icon name="add-circle"></ion-icon>
+            </button>
+          </td>
+          <td style="text-align:center;padding:5px;">
+            <button (click)="editClick(item)" icon-only ion-button outline style="border:none;">
+              <ion-icon name="create"></ion-icon></button>
+          </td>
+          <td style="text-align:center;">
+            <button *ngIf="loginUsername == wrusername" (click)="deleteConfirm(item.ID)" color="danger" 
+                    ion-button icon-only outline style="border:none;">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+      
+      
+      
+    </div>
+    
+  </div>
+  
   <dx-popup
     showCloseButton="false"     
     [width]="300"

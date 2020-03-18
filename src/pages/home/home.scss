@@ -9,18 +9,7 @@ page-home {
         padding-top: 10px;
       }
       
-      .btn {
-        // border: 2px solid gray;
-        // color: gray;
-        //background-color: rgb(187, 255, 0);
-        // padding: 8px 20px;
-        // border-radius: 4px;
-        // font-size: 17px;
-        // font-weight: bold;
-        // height: 40px;
-        //width: 100%;
-      }
-      
+    
       .upload-btn-wrapper input[type=file] {
         font-size: 100px;
         position: absolute;
@@ -33,4 +22,44 @@ page-home {
         width: 80px;
         
       }
+
+      #grid-wrapper {
+        width: 100%;
+        margin: 0 auto 20px auto;
+        
+      }
+  
+      .container {
+        width: 100%;
+        text-align:center;
+        /*border: 1px solid #ccc;*/
+      }
+      .card {
+        position: relative;
+        display: inline-block;
+        min-width: 320px;
+        max-width: 320px;
+        min-height: 430px;
+        
+        background: #ffffff;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top:5px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        /*box-shadow: 0 2px 5px rgba(0,0,0,0.5);*/
+        overflow: hidden;
+        text-align: left;
+        border: 1px solid #ccc;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        /*IE7 hack. Weep salty tears*/
+        *display: inline;
+        zoom: 1;
+      }
+  
+
+
 }
