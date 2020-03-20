@@ -12,52 +12,27 @@
   <!-- <button ion-button color="primary">Primary</button> -->
   <!-- <button ion-button (click)="uploadFiles()">Upload files</button> -->
 
-<button ion-button color="danger" style="width: 100%;" (click)="uploadFiles()" >Upload</button>
+<button ion-button color="medium" style="width: 100%;" (click)="uploadFiles()" >Upload</button>
 
   <h3>Your files: {{ fileUploader?.queue?.length }}</h3>
-  <ul style="width: 100%;">
-    <li *ngFor="let item of fileUploader.queue ; let index = index">
-      <table>
-        <tr>
-          <td>
-            {{ item?.file?.name }} 
-            <img [src]="getThumbnail(index)" class="contribution-image" />
-          </td>
-          <td>
-            <button (click)="removeItem(index)">delete</button>
-          </td>
-        </tr>
-      </table>
-      
-    </li>
-  </ul>
+
   
-  <div class="container" *ngIf="devWidth < 1200">
-    <div class="card" *ngFor="let item of jsonData; let i = index">
-      <ion-list>
+  <div class="container">
+    <div class="card" *ngFor="let item of fileUploader.queue ; let index = index">
+      <ion-list style="margin-bottom: 0px;">
         <ion-item>
-          <div style="color:#0094ff;float:left;">{{item.RDATE | date:'dd/MM/yyyy'}}</div>
-          <div style="color:#ff0000;float:right;">{{item.RDATE | date:'H'}}</div>
-        </ion-item>
-        <ion-item><strong style="color:#ff6a00;">{{item.WORKNAME}}</strong></ion-item>
-        <ion-item>
-          <h3 color="primary" style="float:left;vertical-align:middle;">Progress</h3>
-          <label style="float:right;">{{ item.RPROGRESS }}%</label>
-          <div style="float:left;margin-top:3px;" class="progress-bar green stripes">
-            <span [style.width.%]="item.RPROGRESS"></span>
-          </div>
-        </ion-item>
-        <ion-item>
-          {{item.RWRESULT}}
-        </ion-item>
-        <ion-item>
-          {{item.RCONTENT}}
-        </ion-item>
-        <ion-item>
-          {{item.RMANAGER_COMMENT}}
+          {{ item?.file?.name }}
+          <br/>
+          <img [src]="getThumbnail(index)" class="contribution-image" />
+          <br/>
+          <!-- <button ion-button  color="danger" (click)="removeItem(index)">Remove</button> -->
+          <button (click)="removeItem(index)" color="danger" style="width: 100%; max-width: 256px; height: 30px; border-radius: 5px;" 
+              ion-button icon-only outline >
+            <ion-icon name="trash"></ion-icon>
+          </button>
         </ion-item>
       </ion-list>
-      <table cellpadding="0" cellspacing="0" style="position:absolute;bottom:10px;width:295px;">
+      <!-- <table cellpadding="0" cellspacing="0" style="position:absolute;bottom:10px;width:295px;">
         <tr>
           <td style="text-align:center;">
             <button *ngIf="loginUsername == wrusername" (click)="addWrClick(item.RWORKID,item.WORKNAME)"
@@ -76,7 +51,7 @@
             </button>
           </td>
         </tr>
-      </table>
+      </table> -->
       
       
       
@@ -99,19 +74,5 @@
         
   </dx-popup>
 
-  <!-- <dx-popup
-      showCloseButton="false"     
-      [width]="92"
-      [height]="90"
-      [showTitle]="false"
-      title="Progress"
-      [dragEnabled]="false"
-      [closeOnOutsideClick]="false"
-      
-      [(visible)]="popupVisible">
-      
-      <dx-load-indicator style="margin-left: auto; margin-right: auto; width: 50px;" id="large-indicator" height="47" width="47"></dx-load-indicator>
-
-  </dx-popup> -->
 
 </ion-content>

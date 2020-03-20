@@ -19,8 +19,10 @@ page-home {
         width: 100%;
       }
       .contribution-image {
-        width: 80px;
-        
+        width: 100%;
+        max-width: 260px;
+        border-radius: 5px;
+        margin-top: 5px;
       }
 
       #grid-wrapper {
@@ -37,24 +39,21 @@ page-home {
       .card {
         position: relative;
         display: inline-block;
-        min-width: 320px;
-        max-width: 320px;
-        min-height: 430px;
-        
+        min-width: 280px;
         background: #ffffff;
         margin-left: 5px;
         margin-right: 5px;
         margin-top:5px;
         margin-bottom: 5px;
-        border-radius: 10px;
+        border-radius: 5px;
         /*box-shadow: 0 2px 5px rgba(0,0,0,0.5);*/
         overflow: hidden;
         text-align: left;
         border: 1px solid #ccc;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
         /*IE7 hack. Weep salty tears*/
         *display: inline;
         zoom: 1;
