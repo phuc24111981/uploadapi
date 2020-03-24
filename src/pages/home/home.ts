@@ -26,7 +26,7 @@ export class HomePage
   popupVisible = false;
   public previewPath: any;
   public pPath: Array<any> = [];
-  
+  public enableUpload: Boolean = false;
 
   constructor(public navCtrl: NavController, private uploadingService: CcupProvider, public sanitizer: DomSanitizer ) 
   {
@@ -35,7 +35,8 @@ export class HomePage
       this.pPath.push(this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file))));
     }
   }
-  removeItem(index) {
+  removeItem(index) 
+  {
     this.fileUploader.queue[index].remove(); 
     this.pPath.splice(index,1);
   }
@@ -62,52 +63,58 @@ export class HomePage
   }
   uploadFiles() 
   {
-    this.uploadSuccess = true;
-    let files = this.getFiles();
-    let requests = [];
-    this.progress = 0;
-    // files.forEach((file) => 
-    // {
-    //   let formData = new FormData();
-    //   formData.append('file' , file.rawFile, file.name);
-    //   console.log(formData);
-    //   requests.push(this.uploadingService.uploadFormData(formData).subscribe
-    //   (
-    //     (res) => {},
-    //     (err) => 
-    //     {  
-    //       //console.log(err);
-    //       this.uploadSuccess = false;
-    //       //alert('Teo');
-    //     }
-    //   ));
-        
-    // });
-    this.filesCount = files.length;
-    console.log(this.filesCount);
-    this.popupVisible = true;
-    this.filesUploadAlready = 0;
-
-    files.forEach((file) => 
+    if( this.fileUploader.queue.length > 0)
     {
-      let formData = new FormData();
-      formData.append('file' , file.rawFile, file.name);
-      requests.push(this.uploadingService.uploadFormData(formData).subscribe((event: String) => 
-      {
-        if(event == '0')
-        {
-          this.filesUploadAlready = this.filesUploadAlready + 1;
-          //alert('Up xong roi!');
-          this.checkIfDoneUpload();
-        }
-        else
-        {
-          //alert('Upload failed!');
-        }
-        
-      }));
-    });
+      this.uploadSuccess = true;
+      let files = this.getFiles();
+      let requests = [];
+      this.progress = 0;
+      // files.forEach((file) => 
+      // {
+      //   let formData = new FormData();
+      //   formData.append('file' , file.rawFile, file.name);
+      //   console.log(formData);
+      //   requests.push(this.uploadingService.uploadFormData(formData).subscribe
+      //   (
+      //     (res) => {},
+      //     (err) => 
+      //     {  
+      //       //console.log(err);
+      //       this.uploadSuccess = false;
+      //       //alert('Teo');
+      //     }
+      //   ));
+          
+      // });
+      this.filesCount = files.length;
+      console.log(this.filesCount);
+      this.popupVisible = true;
+      this.filesUploadAlready = 0;
 
+      files.forEach((file) => 
+      {
+        let formData = new FormData();
+        formData.append('file' , file.rawFile, file.name);
+        requests.push(this.uploadingService.uploadFormData(formData).subscribe((event: String) => 
+        {
+          if(event == '0')
+          {
+            this.filesUploadAlready = this.filesUploadAlready + 1;
+            //alert('Up xong roi!');
+            this.checkIfDoneUpload();
+          }
+          else
+          {
+            //alert('Upload failed!');
+          }
+          
+        }));
+      });
+    }
+    else
+    {
+      alert('Please browse files !')
+    }
   }
 
 
@@ -122,6 +129,11 @@ export class HomePage
     
   }
 
+  removeAllItem() 
+  {
+    //this.fileUploader.queue = 0;
+    this.fileUploader.queue.length = 0;
+  }
   
 
 }
