@@ -21,8 +21,8 @@
     <div class="card" *ngFor="let item of fileUploader.queue ; let index = index">
       <ion-list style="margin-bottom: 0px;">
         <ion-item>
-          {{ item?.file?.name }}
-          <br/>
+          <!-- {{ item?.file?.name }}
+          <br/> -->
           <img [src]="getThumbnail(index)" class="contribution-image" />
           <br/>
           <!-- <button ion-button  color="danger" (click)="removeItem(index)">Remove</button> -->
